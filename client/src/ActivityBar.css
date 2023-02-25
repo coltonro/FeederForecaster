@@ -1,0 +1,63 @@
+.activityBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 60px;
+    margin-bottom: 20px;
+    outline: 1px solid black;
+    border-radius: 5px 20px 20px 5px;
+}
+
+.activityLevelText {
+    justify-content: center;
+}
+
+.dayText {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 80px;
+    padding-left: 15px;
+    font-size: 17px;
+}
+
+.activityLevelText {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.minWidth {
+    width: 25%;
+    border: 1px solid red;
+    -webkit-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    -moz-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+}
+
+.lowWidth {
+    width: 45%;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 30%, rgba(56, 176, 0, 1) 250%);
+    -webkit-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    -moz-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+}
+
+.mediumWidth {
+    width: 70%;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 30%, rgba(112, 224, 0, 1) 160%);
+    -webkit-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    -moz-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+}
+
+.highWidth {
+    width: 85%;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 30%, rgba(158, 240, 26, 1) 100%);
+    -webkit-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    -moz-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+}
