@@ -22,7 +22,7 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday }) => {
                 {weekday}
             </div>
             <div className='activityLevelText'>
-                {city ? forecast.activity : ''}
+                {/* {city ? forecast.activity : ''} */}
             </div>
         </div>
     )

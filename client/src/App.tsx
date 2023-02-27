@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import RegionSelect from './RegionSelect'
 import ActivityBar from './ActivityBar'
 import Recommendations from './Recommendations'
@@ -20,48 +20,53 @@ function App() {
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   const todaysMonth: string = months[new Date().getMonth()]
   const todaysDate: number = new Date().getDate()
-  const threeDaysFromToday: number = new Date().getDate() + 3
-  const monthInThreeDays: string = months[new Date(threeDaysFromToday).getMonth()]
+  const threeDaysFromToday: number = new Date(`${todaysMonth} ${todaysDate + 3}`).getDate()
+  const monthInThreeDays: string = months[new Date(`${todaysMonth} ${todaysDate + 3}`).getMonth()]
 
-  const dailyPredictions = () => {
-    return forecast.map((day, i) => {
-      return <ActivityBar
-        city={city}
-        forecast={forecast[i]}
-        weekday={weekdaysForActivityBars[i]}
-        key={`activityBar-${i}`} />
-    })
-  }
+const dailyPredictions = () => {
+  return forecast.map((day, i) => {
+    return <ActivityBar
+      city={city}
+      forecast={forecast[i]}
+      weekday={weekdaysForActivityBars[i]}
+      key={`activityBar-${i}`} />
+  })
+}
 
-  return (
-    <>
-      <header className='pageTitle'>
-        <h1>Feeder Forcaster</h1>
-        <h2>How Busy will your Bird Feeders Be?</h2>
-        {/* <h2>How Hungry will your Birds Be?</h2> */}
-      </header>
-      <main className='allSections'>
-        <section className='regionSelect'>
-          <RegionSelect setCity={setCity} />
-        </section>
+return (
+  <div className='app'>
+    <header className='pageTitle'>
+      <h1>Feeder Forcaster</h1>
+      <h2>How Busy will your Bird Feeders Be?</h2>
+      {/* <h2>How Hungry will your Birds Be?</h2> */}
+    </header>
+    <main className='allSections'>
+      <section className='regionSelect'>
+        <RegionSelect setCity={setCity} />
+      </section>
+      <div className={!city ? 'displayNone' : undefined}>
         <div className='monthdate'>
-          <h2>{`${todaysMonth} ${todaysDate} - ${monthInThreeDays} ${threeDaysFromToday}`}</h2>
+          <h2>Feeder Activity</h2>
+          <p>{`${todaysMonth} ${todaysDate} - ${monthInThreeDays} ${threeDaysFromToday}`}</p>
         </div>
         <section className='activityBarContainer'>
           {dailyPredictions()}
         </section>
         <section className='recommendationsSection'>
-          <h2>What Birds Need Right Now</h2>
+          <h2>Food</h2>
+          <p>What Birds Need Right Now</p>
 
           <Recommendations city={city} />
         </section>
         <section className='speciesSection'>
-          <h2>Species to Watch For</h2>
+          <h2>Birds</h2>
+          <p>Species to Watch For</p>
           <Species city={city} />
         </section>
-      </main>
-    </>
-  )
+      </div>
+    </main>
+  </div>
+)
 }
 
 export default App

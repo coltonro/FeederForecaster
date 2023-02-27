@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import FoodCard from './FoodCard'
+import Card from './Card'
 import './recommendations.css'
 
 type Props = {
@@ -33,7 +33,7 @@ const Recommendations: React.FC<Props> = ({ city }) => {
       food.map((foodObj, i) => {
         return (
         <div className='cardContainer' key={`foodCard-${i}`}>
-          <FoodCard foodObj={foodObj} />
+          <Card foodObj={foodObj} />
         </div>
         )
       })

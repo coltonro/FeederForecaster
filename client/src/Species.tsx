@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import FoodCard from './FoodCard'
-import './FoodCard.css'
+import Card from './Card'
 
 type Props = {
   city: null | string
@@ -21,10 +20,10 @@ const Species: React.FC<Props> = ({ city }) => {
   return (
     <>
       {/* {city && <FoodCard speciesObj={species}/>} */}
-      {city && species.map(bird => {
+      {city && species.map((bird, i) => {
         return (
-          <div className='cardContainer'>
-            <FoodCard speciesObj={bird} />
+          <div className='cardContainer' key={`speciesCard-${i}`}>
+            <Card speciesObj={bird} />
           </div>
         )
       })}
