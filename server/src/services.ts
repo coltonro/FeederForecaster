@@ -1,5 +1,5 @@
 // retrieve weather data from external api
-const retrieveWeather = async (city) => {
+const retrieveWeather = async (city: string) => {
     // const offset = helper.getOffset(page, config.listPerPage);
     // const rows = await db.query(
     //   `SELECT id, name, released_year, githut_rank, pypl_rank, tiobe_rank 

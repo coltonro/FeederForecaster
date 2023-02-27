@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import weatherController from './src/controllers.js';
+import weatherController from './src/controllers';
 const app = express();
 const PORT = 8080;
 
@@ -25,7 +25,7 @@ app.use('*', (req, res) => {
 });
 
 // Global error handler
-app.use((err, req, res, next) => {
+app.use((err, res) => {
   console.log(err);
   res.status(500).send('Internal Server Error');
 });

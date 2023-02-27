@@ -1,9 +1,13 @@
-const weatherController = {}
+interface apiData {
+    apiData: any
+}
 
-weatherController.apiData = async (req, res, next) => {
+const weatherController = <apiData>{}
+
+weatherController.apiData = async (req: any, res: any, next: any) => {
     try {
         res.locals = 'weather data here'
-    } catch (err) {
+    } catch (err: any) {
         console.error(`Error in controller.js while calling retrieveWeather(): `, err.message);
         next(err);
     }
