@@ -1,5 +1,5 @@
 import React from 'react'
-import './FoodCard.css'
+import './Card.css'
 
 type Props = {
   foodObj?: {
@@ -12,20 +12,20 @@ type Props = {
   }
 }
 
-const FoodCard: React.FC<Props> = ({ foodObj, speciesObj }) => {
+const Card: React.FC<Props> = ({ foodObj, speciesObj }) => {
   return (
-    <div className='foodCard'>
-      <div className='foodImg'>
+    <div className='card'>
+      <div className='cardImg'>
       </div>
       <div className='cardText'>
         {/* <h3>{foodObj && foodObj.food}</h3> */}
         <h3>{foodObj ? foodObj.food : speciesObj && speciesObj.species}</h3>
         <div className='cardDesc'>
-        {foodObj ? foodObj.desc : speciesObj && speciesObj.text}
+        <p>{foodObj ? foodObj.desc : speciesObj && speciesObj.text}</p>
         </div>
       </div>
     </div>
   )
 }
 
-export default FoodCard
+export default Card
