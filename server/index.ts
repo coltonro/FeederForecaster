@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
-import weatherController from './src/controllers';
+import weatherController from './src/apiController.js';
+import logicController from './src/logicController.js';
 const app = express();
 const PORT = 8080;
 
@@ -13,7 +14,7 @@ app.get('/', (req,res) => {
   res.sendFile(`${process.cwd()}../client/dist/index.html`);
 });
 
-app.use('/weather', weatherController.apiData, (req, res) => {
+app.use('/weather', weatherController.apiData, logicController.forecast, (req, res) => {
     res.json(res.locals);
   });
 
@@ -25,11 +26,11 @@ app.use('*', (req, res) => {
 });
 
 // Global error handler
-app.use((err, res) => {
+app.use((err: any, req: any, res: any, next: any) => {
   console.log(err);
   res.status(500).send('Internal Server Error');
 });
 
 app.listen(PORT, () => { console.log(`Listening on port ${PORT}...`); });
 
-export default app;
+// export default app;
