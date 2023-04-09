@@ -26,6 +26,7 @@ function App() {
 const dailyPredictions = () => {
   return forecast.map((day, i) => {
     return <ActivityBar
+      i={i}
       city={city}
       forecast={forecast[i]}
       weekday={weekdaysForActivityBars[i]}

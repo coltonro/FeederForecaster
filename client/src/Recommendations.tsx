@@ -20,7 +20,7 @@ const Recommendations: React.FC<Props> = ({ city }) => {
     },
     {
       food: 'Suet',
-      desc: 'Crude fat for warmth'
+      desc: 'Crude fat for energy'
     },
     {
       food: 'Peanuts',

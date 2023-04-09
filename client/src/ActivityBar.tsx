@@ -6,10 +6,11 @@ type Props = {
     forecast: {
         activity: string;
     },
-    weekday: string
+    weekday: string,
+    i: number
 }
 
-const ActivityBar: React.FC<Props> = ({ city, forecast, weekday }) => {
+const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
     const barWidth = city ? forecast.activity === 'Low' ? 'lowWidth' :
         forecast.activity === 'Medium' ? 'mediumWidth' :
             forecast.activity === 'High' ? 'highWidth' :
@@ -19,7 +20,7 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday }) => {
     return (
         <div className={`activityBar ${barWidth}`}>
             <div className='dayText'>
-                {weekday}
+                {i === 0 ? "Today" : weekday}
             </div>
             <div className='activityLevelText'>
                 {/* {city ? forecast.activity : ''} */}

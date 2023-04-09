@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Select } from '@mantine/core';
 import './RegionSelect.css';
 
@@ -6,9 +6,22 @@ type Props = {
   setCity: React.Dispatch<React.SetStateAction<any>>
 };
 
-const RegionSelect: React.FC<Props> = ({ setCity }) => {
+type WeatherData = {
+  days: {
+    cloudcover: number,
+    datetime: string,
+    precip: number,
+    precipprob: number,
+    tempmax: number,
+    tempmin: number,
+    windspeed: number
+  }[]
+} | null;
 
-  const regionHandler = (e: string | null) => {
+const RegionSelect: React.FC<Props> = ({ setCity }) => {
+  const todaysDate = new Date().toISOString().split('T')[0]
+
+  const getWeather = (e: string | null) => {
     fetch('http://localhost:8080/weather', {
       method: "POST",
       headers: {
@@ -30,7 +43,7 @@ const RegionSelect: React.FC<Props> = ({ setCity }) => {
     <Select
       label="Select a Region"
       placeholder="Nearby City"
-      onChange={e => regionHandler(e)}
+      onChange={e => getWeather(e)}
       data={[
         { value: 'austin', label: 'Austin' },
         { value: 'dallas', label: 'Dallas' },
