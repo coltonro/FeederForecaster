@@ -1,28 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Select } from '@mantine/core';
-import './RegionSelect.css';
+// import './RegionSelect.css';
 
 type Props = {
   setCity: React.Dispatch<React.SetStateAction<any>>
+  setForecast: React.Dispatch<React.SetStateAction<any>>
 };
 
-type WeatherData = {
-  days: {
-    cloudcover: number,
-    datetime: string,
-    precip: number,
-    precipprob: number,
-    tempmax: number,
-    tempmin: number,
-    windspeed: number
-  }[]
-} | null;
-
-const RegionSelect: React.FC<Props> = ({ setCity }) => {
-  const todaysDate = new Date().toISOString().split('T')[0]
+const RegionSelect: React.FC<Props> = ({ setCity, setForecast }) => {
 
   const getWeather = (e: string | null) => {
-    fetch('http://localhost:8080/weather', {
+    fetch('http://localhost:8080/cityForecast', {
       method: "POST",
       headers: {
         'Accept': 'application/json',
@@ -35,6 +23,7 @@ const RegionSelect: React.FC<Props> = ({ setCity }) => {
     .then(response => response.json())
     .then(data => {
       console.log('data: ', data)
+      setForecast(data)
     })
     setCity(e)
   }
@@ -48,7 +37,7 @@ const RegionSelect: React.FC<Props> = ({ setCity }) => {
         { value: 'austin', label: 'Austin' },
         { value: 'dallas', label: 'Dallas' },
         { value: 'houston', label: 'Houston' },
-        { value: 'sanAntonio', label: 'San Antonio' },
+        { value: 'san antonio', label: 'San Antonio' },
       ]}
     />
   )

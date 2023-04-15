@@ -1,19 +1,17 @@
-import React from 'react'
-import './ActivityBar.css'
+import React from 'react';
+import './ActivityBar.css';
 
 type Props = {
     city: null | string,
-    forecast: {
-        activity: string;
-    },
+    forecast: string,
     weekday: string,
     i: number
 }
 
 const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
-    const barWidth = city ? forecast.activity === 'Low' ? 'lowWidth' :
-        forecast.activity === 'Medium' ? 'mediumWidth' :
-            forecast.activity === 'High' ? 'highWidth' :
+    const barWidth = city ? forecast === 'low' ? 'lowWidth' :
+        forecast === 'medium' ? 'mediumWidth' :
+            forecast === 'high' ? 'highWidth' :
                 'minWidth' : '';
 
 

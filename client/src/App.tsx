@@ -1,18 +1,13 @@
-import { useState, useEffect } from 'react'
-import RegionSelect from './RegionSelect'
-import ActivityBar from './ActivityBar'
-import Recommendations from './Recommendations'
-import Species from './Species'
+import { useState } from 'react'
+import RegionSelect from './regionSelect/RegionSelect'
+import ActivityBar from './activityBar/ActivityBar'
+import Recommendations from './recommendations/Recommendations'
+import Species from './species/Species'
 import './App.css'
 
 function App() {
   const [city, setCity] = useState(null)
-  const [forecast, setForcast] = useState([
-    { activity: 'Medium' },
-    { activity: 'Medium' },
-    { activity: 'Low' },
-    { activity: 'High' },
-  ])
+  const [forecast, setForecast] = useState(Array<string>)
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue"]
   const weekday: number = new Date().getDay()
@@ -39,11 +34,10 @@ return (
     <header className='pageTitle'>
       <h1>Feeder Forcaster</h1>
       <h2>How Busy will your Bird Feeders Be?</h2>
-      {/* <h2>How Hungry will your Birds Be?</h2> */}
     </header>
     <main className='allSections'>
       <section className='regionSelect'>
-        <RegionSelect setCity={setCity} />
+        <RegionSelect setCity={setCity} setForecast={setForecast} />
       </section>
       <div className={!city ? 'displayNone' : undefined}>
         <div className='monthdate'>
