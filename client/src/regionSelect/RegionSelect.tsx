@@ -10,6 +10,7 @@ type Props = {
 const RegionSelect: React.FC<Props> = ({ setCity, setForecast }) => {
 
   const getWeather = (e: string | null) => {
+    setCity(null)
     fetch('http://localhost:8080/cityForecast', {
       method: "POST",
       headers: {

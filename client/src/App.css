@@ -37,6 +37,12 @@ h2 {
   width: 100%;
 }
 
+.showLoader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .regionSelect {
   width: 100%;
   margin: 10px 0 35px;
@@ -51,8 +57,8 @@ h2 {
 .activityBarContainer {
   margin: 0 0 4% 8%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: flex-end;
 }
 
 .recommendationsSection {

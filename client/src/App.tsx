@@ -3,6 +3,7 @@ import RegionSelect from './regionSelect/RegionSelect'
 import ActivityBar from './activityBar/ActivityBar'
 import Recommendations from './recommendations/Recommendations'
 import Species from './species/Species'
+import { Loader } from '@mantine/core';
 import './App.css'
 
 function App() {
@@ -39,6 +40,9 @@ return (
       <section className='regionSelect'>
         <RegionSelect setCity={setCity} setForecast={setForecast} />
       </section>
+      <div className={city && forecast.length < 1 ? 'showLoader' : 'displayNone'}>
+        <Loader size="xl" variant="bars" />
+      </div>
       <div className={!city ? 'displayNone' : undefined}>
         <div className='monthdate'>
           <h2>Feeder Activity</h2>
