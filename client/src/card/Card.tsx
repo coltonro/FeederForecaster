@@ -3,8 +3,9 @@ import './Card.css'
 
 type Props = {
   foodObj?: {
-    food: string,
-    desc: string
+    title: string,
+    desc: string,
+    imgPath: string
   },
   speciesObj?: {
     species: string,
@@ -13,13 +14,16 @@ type Props = {
 }
 
 const Card: React.FC<Props> = ({ foodObj, speciesObj }) => {
+  const dataObj = foodObj ? foodObj : speciesObj;
   return (
     <div className='card'>
-      <div className='cardImg'>
+      <div className='cardImgContainer'>
+        <img src={foodObj && foodObj.imgPath} className='cardImg'/>
       </div>
       <div className='cardText'>
-        {/* <h3>{foodObj && foodObj.food}</h3> */}
-        <h3>{foodObj ? foodObj.food : speciesObj && speciesObj.species}</h3>
+        <div>
+        <h3>{foodObj ? foodObj.title : speciesObj && speciesObj.species}</h3>
+        </div>
         <div className='cardDesc'>
         <p>{foodObj ? foodObj.desc : speciesObj && speciesObj.text}</p>
         </div>

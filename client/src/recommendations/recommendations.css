@@ -3,3 +3,9 @@
     width: 90%;
     margin-bottom: 10px;
 }
+
+@media screen and (min-width: 600px) {
+    .cardContainer {
+      height: 200px;
+    }
+  }

@@ -7,65 +7,70 @@ import { Loader } from '@mantine/core';
 import './App.css'
 
 function App() {
-  const [city, setCity] = useState(null)
+  const [city, setCity] = useState('')
   const [forecast, setForecast] = useState(Array<string>)
 
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon", "Tue"]
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"]
   const weekday: number = new Date().getDay()
   const weekdaysForActivityBars = [days[weekday], days[weekday + 1], days[weekday + 2], days[weekday + 3]]
   const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
   const todaysMonth: string = months[new Date().getMonth()]
   const todaysDate: number = new Date().getDate()
-  const threeDaysFromToday: number = new Date(`${todaysMonth} ${todaysDate + 3}`).getDate()
-  const monthInThreeDays: string = months[new Date(`${todaysMonth} ${todaysDate + 3}`).getMonth()]
+  const twoDaysFromToday: number = new Date(`${todaysMonth} ${todaysDate + 2}`).getDate()
+  const monthInTwoDays: string = months[new Date(`${todaysMonth} ${todaysDate + 2}`).getMonth()]
 
-const dailyPredictions = () => {
-  return forecast.map((day, i) => {
-    return <ActivityBar
-      i={i}
-      city={city}
-      forecast={forecast[i]}
-      weekday={weekdaysForActivityBars[i]}
-      key={`activityBar-${i}`} />
-  })
-}
+  const dailyPredictions = () => {
+    return forecast.map((day, i) => {
+      return <ActivityBar
+        i={i}
+        city={city}
+        forecast={forecast[i]}
+        weekday={weekdaysForActivityBars[i]}
+        key={`activityBar-${i}`} />
+    })
+  }
 
-return (
-  <div className='app'>
-    <header className='pageTitle'>
-      <h1>Feeder Forcaster</h1>
+  return (
+    <div className='app'>
+      <header className='pageTitle'>
+        <h1>Feeder Forecaster</h1><sup>Beta</sup>
+      </header>
       <h2>How Busy will your Bird Feeders Be?</h2>
-    </header>
-    <main className='allSections'>
-      <section className='regionSelect'>
-        <RegionSelect setCity={setCity} setForecast={setForecast} />
-      </section>
-      <div className={city && forecast.length < 1 ? 'showLoader' : 'displayNone'}>
-        <Loader size="xl" variant="bars" />
-      </div>
-      <div className={!city ? 'displayNone' : undefined}>
-        <div className='monthdate'>
-          <h2>Feeder Activity</h2>
-          <p>{`${todaysMonth} ${todaysDate} - ${monthInThreeDays} ${threeDaysFromToday}`}</p>
-        </div>
-        <section className='activityBarContainer'>
-          {dailyPredictions()}
+      <main className='allSections'>
+        <section className='regionSelectContainer'>
+          <div className='regionSelect'>
+            <RegionSelect setCity={setCity} setForecast={setForecast} />
+          </div>
         </section>
-        <section className='recommendationsSection'>
-          <h2>Food</h2>
-          <p>What Birds Need Right Now</p>
+        {/* <div className={city && forecast.length < 1 ? 'showLoader' : 'displayNone'}>
+          <Loader size="xl" />
+        </div> */}
+        <div className={!city.length ? 'displayNone' : 'contentContainer'}>
+          <section className='forecastContainer'>
+            <div className='monthdate'>
+              <h2>{city ? city.charAt(0).toUpperCase() + city.slice(1) : null} Activity</h2>
+              <p>{`${todaysMonth} ${todaysDate} - ${monthInTwoDays} ${twoDaysFromToday}`}</p>
+            </div>
+            <section className='activityBarContainer'>
+              {city ? dailyPredictions() : <Loader />}
+            </section>
+            {'* select day to see full forecast'}
+          </section>
+          <section className='recommendationsSection'>
+            <h2>Food</h2>
+            <p>What Birds Need Right Now</p>
 
-          <Recommendations city={city} />
-        </section>
-        <section className='speciesSection'>
-          <h2>Birds</h2>
-          <p>Species to Watch For</p>
-          <Species city={city} />
-        </section>
-      </div>
-    </main>
-  </div>
-)
+            <Recommendations city={city} />
+          </section>
+          <section className='speciesSection'>
+            <h2>Birds</h2>
+            <p>Species to Watch For</p>
+            <Species city={city} />
+          </section>
+        </div>
+      </main>
+    </div>
+  )
 }
 
 export default App

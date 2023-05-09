@@ -1,6 +1,6 @@
 import React from 'react'
 import { Select } from '@mantine/core';
-// import './RegionSelect.css';
+import './RegionSelect.css';
 
 type Props = {
   setCity: React.Dispatch<React.SetStateAction<any>>
@@ -21,26 +21,25 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast }) => {
         city: e
       })
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('data: ', data)
-      setForecast(data)
-    })
+      .then(response => response.json())
+      .then(data => {
+        setForecast(data)
+      })
     setCity(e)
   }
 
   return (
-    <Select
-      label="Select a Region"
-      placeholder="Nearby City"
-      onChange={e => getWeather(e)}
-      data={[
-        { value: 'austin', label: 'Austin' },
-        { value: 'dallas', label: 'Dallas' },
-        { value: 'houston', label: 'Houston' },
-        { value: 'san antonio', label: 'San Antonio' },
-      ]}
-    />
+      <Select
+        label="Select a Region"
+        placeholder="Nearby City"
+        onChange={e => getWeather(e)}
+        data={[
+          { value: 'austin', label: 'Austin' },
+          { value: 'dallas', label: 'Dallas' },
+          { value: 'houston', label: 'Houston' },
+          { value: 'san antonio', label: 'San Antonio' },
+        ]}
+      />
   )
 }
 

@@ -35,7 +35,7 @@ weatherController.apiData = async (req: any, res: any, next: any) => {
         res.locals.weather = weather;
         } else {
           const weather = myCache.get(`${city}`)
-            console.log('cache hit!: ', weather)
+            console.log('cache hit!: ')
             res.locals.weather = weather;
         }
         
