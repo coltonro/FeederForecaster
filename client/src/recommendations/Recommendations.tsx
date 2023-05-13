@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
 import Card from '../card/Card'
-import sunflowerseeds from '../../../public/sunflowerseeds.jpg';
 import './recommendations.css'
 
 type Props = {
   city: null | string,
-}
+};
 
 type Food = { 
   title: string,
   desc: string,
   imgPath: string
-}[]
+}[];
 
 
-const Recommendations: React.FC<Props> = ({ city }) => {
+// const Recommendations: React.FC<Props> = ({ city }) => {
+  const Recommendations = ( city: Props ) => {
   const [food, setFood] = useState([
     {
       title: 'Sunflower',
