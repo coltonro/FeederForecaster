@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import Card from './Card'
+import Card from '../card/Card'
+import sunflowerseeds from '../../../public/sunflowerseeds.jpg';
 import './recommendations.css'
 
 type Props = {
@@ -7,24 +8,28 @@ type Props = {
 }
 
 type Food = { 
-  food: string,
-  desc: string
+  title: string,
+  desc: string,
+  imgPath: string
 }[]
 
 
 const Recommendations: React.FC<Props> = ({ city }) => {
   const [food, setFood] = useState([
     {
-      food: 'Black Oil Sunflower',
-      desc: 'High quality protein'
+      title: 'Sunflower',
+      desc: 'High quality protein',
+      imgPath: '/sunflowerseeds.jpg'
     },
     {
-      food: 'Suet',
-      desc: 'Crude fat for warmth'
+      title: 'Suet',
+      desc: 'Crude fat for energy',
+      imgPath: '/suet_cake.png'
     },
     {
-      food: 'Peanuts',
-      desc: 'Favorite of Jays & Woodpeckers'
+      title: 'Peanuts',
+      desc: 'Favorite of Jays & Woodpeckers',
+      imgPath: '/peanuts.jpg'
     }
   ])
 

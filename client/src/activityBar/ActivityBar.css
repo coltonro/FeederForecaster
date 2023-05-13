@@ -1,0 +1,129 @@
+.barAndText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 2.5%;
+}
+
+.forecastText {
+    font-size: 22px;
+    margin-bottom: 5px;
+    opacity: 60%;
+}
+
+@media screen and (max-width: 400px) {
+    .forecastText {
+        font-size: 18px;
+        margin-bottom: 5px;
+        opacity: 60%;
+    }
+}
+
+.activityBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+
+    outline: 1px solid darkgreen;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.activityBar:hover {
+    cursor: pointer;
+    background: limegreen;
+}
+
+@media screen and (max-width: 400px) {
+    .barAndText {
+        margin: 0 1.5%;
+    }
+}
+
+.activityLevelText {
+    justify-content: center;
+}
+
+.dayText {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 80px;
+    height: 30px;
+    padding: 0 7px;
+    font-size: 17px;
+}
+
+@media screen and (min-width: 400px) {
+    .dayText {
+        padding: 0 10px;
+    }
+}
+
+.activityLevelText {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.infoSvg {
+    height: 70%;
+}
+
+.minHeight {
+    height: 25px;
+    border: 1px solid red;
+    -webkit-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    -moz-box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+    box-shadow: 4px 6px 3px 0px rgba(186, 186, 186, 1);
+}
+
+.lowHeight {
+    height: 50px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 30%, rgba(56, 176, 0, 1) 250%);
+}
+
+.mediumHeight {
+    height: 100px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 30%, rgba(112, 224, 0, 1) 160%);
+}
+
+.highHeight {
+    height: 175px;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 30%, rgba(158, 240, 26, 1) 100%);
+}
+
+.predicitonModal {
+    margin-top: 30%;
+}
+
+@media screen and (min-width: 400px) {
+    .predicitonModal {
+        margin-top: 15%;
+    }
+}
+
+.modalHeader {
+    font-size: 21px;
+    margin-top: -10px;
+}
+
+.modalWeather {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background: antiquewhite;
+    border-radius: 10px;
+    padding-top: 5%;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.highOf{
+    font-size: 13px;
+    margin: -2px 0;
+    padding: 0;
+}

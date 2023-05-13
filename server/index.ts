@@ -14,7 +14,7 @@ app.get('/', (req,res) => {
   res.sendFile(`${process.cwd()}../client/dist/index.html`);
 });
 
-app.use('/weather', weatherController.apiData, logicController.forecast, (req, res) => {
+app.use('/cityForecast', weatherController.apiData, logicController.forecast, (req, res) => {
     res.json(res.locals);
   });
 
