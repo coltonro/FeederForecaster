@@ -1,11 +1,10 @@
-import React from 'react';
-import { useState } from 'react'
-import RegionSelect from './regionSelect/RegionSelect'
-import ActivityBar from './activityBar/ActivityBar'
-import Recommendations from './recommendations/Recommendations'
-import Species from './species/Species'
+import { useState } from 'react';
+import RegionSelect from './regionSelect/RegionSelect';
+import ActivityBar from './activityBar/ActivityBar';
+import Recommendations from './recommendations/Recommendations';
+import Species from './species/Species';
 import { Loader } from '@mantine/core';
-import './App.css'
+import './App.css';
 
 interface Forecast {
   activity: string,
@@ -14,7 +13,7 @@ interface Forecast {
   windspeed: string
 }
 
-function App(props: Forecast) {
+function App() {
   const [city, setCity] = useState('')
   const [forecast, setForecast] = useState(Array<Forecast>)
 
