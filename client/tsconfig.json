@@ -22,7 +22,7 @@
     "noImplicitAny": false,
     "removeComments": true,
     "isolatedModules": true,
-    "noEmit": false,
+    "noEmit": true,
     "jsx": "react-jsx",
     "sourceMap": true
   },

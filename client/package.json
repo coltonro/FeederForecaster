@@ -1,11 +1,11 @@
 {
-  "name": "feeder_forecaster_client",
+  "name": "feeder-forecaster-client",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.prod.json && vite build",
+    "build": "npm install && tsc -p tsconfig.prod.json && vite build",
     "preview": "vite preview",
     "test": "NODE_ENV=test jest"
   },
