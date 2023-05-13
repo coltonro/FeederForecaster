@@ -14,7 +14,7 @@ interface Forecast {
   windspeed: string
 }
 
-function App() {
+function App(props: Forecast) {
   const [city, setCity] = useState('')
   const [forecast, setForecast] = useState(Array<Forecast>)
 
@@ -28,7 +28,7 @@ function App() {
   const monthInTwoDays: string = months[new Date(`${todaysMonth} ${todaysDate + 2}`).getMonth()]
 
   const dailyPredictions = () => {
-    const mappedForecast = forecast.map((day, i) => {
+    const mappedForecast = forecast.map((day: Forecast, i: number) => {
       return <ActivityBar
         i={i}
         city={city}
