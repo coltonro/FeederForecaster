@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react'
 import RegionSelect from './regionSelect/RegionSelect'
 import ActivityBar from './activityBar/ActivityBar'
