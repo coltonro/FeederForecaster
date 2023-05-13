@@ -1,3 +1,5 @@
+import forecastString from "./forecastStrings.js";
+
 interface logicController {
   forecast: any
 }
@@ -51,39 +53,63 @@ logicController.forecast = async (req: any, res: any, next: any) => {
   }
 
   const predictFeederActivity = (tempmax: number, cloudcover: number, windspeed: number) => {
-    if (tempmax < 83 && cloudcover >= 80) return 'medium'
-    if (tempmax >= 80) return 'low';
-    if (tempmax <= 60 && windspeed <= 10) return 'high';
-    return 'medium';
-    // if (tempmax >= 80) return {
-    //   activity: 'low',
-    //   reason: 'too hot',
-    //   tempmax: tempmax,
-    //   cloudcover: cloudcover,
-    //   windspeed: windspeed
-    // };
-    // if (tempmax <= 60 && windspeed <= 10) return {
-    //   activity: 'high',
-    //   reason: '',
-    //   tempmax: tempmax,
-    //   cloudcover: cloudcover,
-    //   windspeed: windspeed
-    // };
-    // return {
-    //   activity: 'medium',
-    //   reason: '',
-    //   tempmax: tempmax,
-    //   cloudcover: cloudcover,
-    //   windspeed: windspeed
-    // };
+    // set sky as clear, partly cloudy, or cloudy
+    // console.log('windspeed: ', windspeed)
+    const sky = cloudcover < 20 ? 'sunny' : cloudcover < 80 ? 'partly cloudy' : 'cloudy';
+    const wind = windspeed < 10 ? 'low' : windspeed <= 14 ? 'light' : 'windy';
+
+    // high temp
+    if (tempmax > 82) return {
+      activity: 'moderate',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      forecast: forecastString.highTemps
+    }
+    // cold with high winds
+    if (tempmax <= 50 && windspeed >= 14) return {
+      activity: 'moderate',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      forecast: forecastString.highWindsButCold
+    };
+    // cold
+    if (tempmax <= 45) return {
+      activity: 'high',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      forecast: forecastString.cold
+    };
+    // high winds
+    if (tempmax >= 82 && cloudcover >= 80 && windspeed <= 10) return {
+      activity: 'moderate',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      forecast: ''
+    };
+    if (tempmax <= 60 && windspeed <= 10) return {
+      activity: 'high',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind
+    };
+    return {
+      activity: 'moderate',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind
+    };
   }
 
   try {
     const weatherForecast = res.locals.weather.days
     const predictionValues = weatherForecast.map((day: Day) => {
       const tempmax = day.tempmax;
-      const cloudcover = day.tempmax;
-      const windspeed = day.tempmax;
+      const cloudcover = day.cloudcover;
+      const windspeed = day.windspeed;
       return predictFeederActivity(tempmax, cloudcover, windspeed)
     })
     res.locals = predictionValues;

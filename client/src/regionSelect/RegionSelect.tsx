@@ -34,10 +34,10 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast }) => {
         placeholder="Nearby City"
         onChange={e => getWeather(e)}
         data={[
-          { value: 'austin', label: 'Austin' },
-          { value: 'dallas', label: 'Dallas' },
-          { value: 'houston', label: 'Houston' },
-          { value: 'san antonio', label: 'San Antonio' },
+          { value: 'Austin', label: 'Austin' },
+          { value: 'Dallas', label: 'Dallas' },
+          { value: 'Houston', label: 'Houston' },
+          { value: 'San Antonio', label: 'San Antonio' },
         ]}
       />
   )

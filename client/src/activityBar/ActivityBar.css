@@ -49,8 +49,14 @@
     justify-content: space-around;
     width: 80px;
     height: 30px;
-    padding-left: 15px;
+    padding: 0 7px;
     font-size: 17px;
+}
+
+@media screen and (min-width: 400px) {
+    .dayText {
+        padding: 0 10px;
+    }
 }
 
 .activityLevelText {
@@ -90,5 +96,34 @@
 }
 
 .predicitonModal {
-    outline: 1px solid red;
+    margin-top: 30%;
+}
+
+@media screen and (min-width: 400px) {
+    .predicitonModal {
+        margin-top: 15%;
+    }
+}
+
+.modalHeader {
+    font-size: 21px;
+    margin-top: -10px;
+}
+
+.modalWeather {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    background: antiquewhite;
+    border-radius: 10px;
+    padding-top: 5%;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.highOf{
+    font-size: 13px;
+    margin: -2px 0;
+    padding: 0;
 }

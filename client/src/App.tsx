@@ -6,9 +6,16 @@ import Species from './species/Species'
 import { Loader } from '@mantine/core';
 import './App.css'
 
+interface Forecast {
+  activity: string,
+  tempmax: number,
+  cloudcover: string,
+  windspeed: string
+}
+
 function App() {
   const [city, setCity] = useState('')
-  const [forecast, setForecast] = useState(Array<string>)
+  const [forecast, setForecast] = useState(Array<Forecast>)
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"]
   const weekday: number = new Date().getDay()
@@ -20,14 +27,16 @@ function App() {
   const monthInTwoDays: string = months[new Date(`${todaysMonth} ${todaysDate + 2}`).getMonth()]
 
   const dailyPredictions = () => {
-    return forecast.map((day, i) => {
+    const mappedForecast = forecast.map((day, i) => {
       return <ActivityBar
         i={i}
         city={city}
-        forecast={forecast[i]}
+        forecast={day}
         weekday={weekdaysForActivityBars[i]}
         key={`activityBar-${i}`} />
-    })
+    });
+
+    return forecast.length ? mappedForecast : <Loader className='forecastLoader' /> ;
   }
 
   return (
@@ -48,7 +57,7 @@ function App() {
         <div className={!city.length ? 'displayNone' : 'contentContainer'}>
           <section className='forecastContainer'>
             <div className='monthdate'>
-              <h2>{city ? city.charAt(0).toUpperCase() + city.slice(1) : null} Activity</h2>
+              <h2>{city && city} Activity</h2>
               <p>{`${todaysMonth} ${todaysDate} - ${monthInTwoDays} ${twoDaysFromToday}`}</p>
             </div>
             <section className='activityBarContainer'>
@@ -58,7 +67,7 @@ function App() {
           </section>
           <section className='recommendationsSection'>
             <h2>Food</h2>
-            <p>What Birds Need Right Now</p>
+            <p>What Birds Want Right Now</p>
 
             <Recommendations city={city} />
           </section>

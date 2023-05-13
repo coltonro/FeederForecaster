@@ -80,6 +80,16 @@ h2 {
   border-radius: 20px;
 }
 
+.forecastLoader {
+  margin-bottom: 30%;
+}
+
+@media screen and (min-width: 500px) {
+  .forecastLoader {
+    margin-bottom: 20%;
+  }
+}
+
 .monthdate {
   display: flex;
   flex-direction: column;

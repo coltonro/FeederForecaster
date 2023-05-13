@@ -2,31 +2,39 @@ import React, { useState } from 'react';
 import { Modal } from '@mantine/core';
 import './ActivityBar.css';
 
+interface Forecast {
+    activity: string,
+    tempmax: number,
+    cloudcover: string,
+    windspeed: string
+}
+
 type Props = {
     city: null | string,
-    forecast: string,
+    forecast: Forecast,
     weekday: string,
     i: number
 }
 
 const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
     const [open, setOpen] = useState(false); // controls modal
-    const barHeight = city ? forecast === 'low' ? 'lowHeight' :
-        forecast === 'medium' ? 'mediumHeight' :
-            forecast === 'high' ? 'highHeight' :
+
+//     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+//     const todaysMonth: string = months[new Date().getMonth()]
+//   const todaysDate: number = new Date().getDate()
+//     const twoDaysFromToday: number = new Date(`${todaysMonth} ${todaysDate + 2}`).getDate()
+//   const monthInTwoDays: string = months[new Date(`${todaysMonth} ${todaysDate + 2}`).getMonth()]
+
+    const barHeight = city ? forecast.activity === 'low' ? 'lowHeight' :
+        forecast.activity === 'moderate' ? 'mediumHeight' :
+            forecast.activity === 'high' ? 'highHeight' :
                 'minHeight' : '';
-
-    // detailed descriptions for prediction modals
-    const low = 'Higher temperatures and clear skies are often correlated with low bird activity. Like humans, they also like to be lazy in the shade on warm days.';
-    const medium = '';
-    const high = '';
-
 
     return (
         <>
             <div className='barAndText'>
                 <div className='forecastText'>
-                    {forecast === 'medium' ? 'moderate' : forecast}
+                    {forecast.activity}
                 </div>
                 <div className={`activityBar ${barHeight}`} onClick={() => setOpen(true)}>
                     <div className='dayText'>
@@ -41,9 +49,23 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
                 opened={open}
                 onClose={() => setOpen(false)}
             >
-                <h3>{`${i === 0 ? "Today" : weekday}'s Forecast`}</h3>
-                {`Activity at your feeders will likely be ${forecast == 'medium' ? 'moderate' : forecast}.`}
-                {``}
+                <h3 className='modalHeader'>
+                    {`${i === 0 ? "Today" : weekday}'s Forecast`}
+                </h3>
+                <div className='modalWeather'>
+                    <div className='tempContainer'>
+                        <p className='highOf'>High of</p>
+                        <p>{Math.floor(forecast.tempmax)}&deg;F</p>
+                    </div>
+                    <p>{forecast.cloudcover.charAt(0).toUpperCase() + forecast.cloudcover.slice(1)}</p>
+                    <p>
+                        {forecast.windspeed.charAt(0).toUpperCase() + forecast.windspeed.slice(1)}
+                        {forecast.windspeed === 'windy' ? null : 'Wind'}
+                    </p>
+                </div>
+                <p>{`Bird activity at your feeders will likely be `}<strong>{forecast.activity}</strong>{`.`}</p>
+                <p>{`With a high of ${Math.floor(forecast.tempmax)} degrees, ${forecast.cloudcover} skies, and ${forecast.windspeed} winds, birds will likely spend much of the day resting in the shade`}</p>
+                <p>{`Activity will spike in the cooler morning hours, then remain fairly slow for the rest of the day.`}</p>
             </Modal>
         </>
     )
