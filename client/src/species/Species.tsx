@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import Card from '../card/Card'
+import React, { useState } from 'react';
+import Card from '../card/Card';
 
 type Props = {
   city: null | string
