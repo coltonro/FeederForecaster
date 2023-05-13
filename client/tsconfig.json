@@ -11,7 +11,7 @@
     ],
     "allowJs": true,
     "skipLibCheck": true,
-    "esModuleInterop": false,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
@@ -22,8 +22,8 @@
     "noImplicitAny": false,
     "removeComments": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react",
+    "noEmit": false,
+    "jsx": "react-jsx",
     "sourceMap": true
   },
   "exclude": [
