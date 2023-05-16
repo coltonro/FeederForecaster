@@ -60,7 +60,7 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
                     <p>{forecast.cloudcover.charAt(0).toUpperCase() + forecast.cloudcover.slice(1)}</p>
                     <p>
                         {forecast.windspeed.charAt(0).toUpperCase() + forecast.windspeed.slice(1)}
-                        {forecast.windspeed === 'windy' ? null : 'Wind'}
+                        {forecast.windspeed === 'windy' ? null : ' Wind'}
                     </p>
                 </div>
                 <p>{`Bird activity at your feeders will likely be `}<strong>{forecast.activity}</strong>{`.`}</p>

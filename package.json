@@ -4,9 +4,14 @@
   "description": "",
   "main": "index.ts",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coltonro/FeederForecaster.git"
+  },
   "scripts": {
     "build": "npm run build --prefix client",
-    "start": "ts-node-esm ./server/index.ts",
+    "start": "nodemon ./server/index.ts",
+    "start-prod": "ts-node-esm ./server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Colton Robbins",

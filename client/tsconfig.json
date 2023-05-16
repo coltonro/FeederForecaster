@@ -2,6 +2,7 @@
   "compilerOptions": {
     "outDir": "build/dist",
     "rootDir": "src",
+    "baseUrl": ".",
     "target": "ES6",
     "useDefineForClassFields": true,
     "lib": [
@@ -36,7 +37,7 @@
     "src/setupTests.ts"
   ],
   "include": [
-    "src"
+    "src", ".ts"
   ],
   "references": [
     {

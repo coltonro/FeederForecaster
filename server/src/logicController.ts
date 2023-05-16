@@ -4,10 +4,21 @@ interface logicController {
   forecast: any
 }
 
+interface Hour {
+  datetime: string,
+  precip: number,
+  precipprob: number,
+  windspeed: number,
+  winddir: number,
+  cloudcover: number
+}
+
 interface Day {
   tempmax: number,
   cloudcover: number,
   windspeed: number,
+  precip: number,
+  hours: [Hour],
   [prop: string]: any; // this allows for additional values without defining them
 }
 
@@ -52,19 +63,29 @@ logicController.forecast = async (req: any, res: any, next: any) => {
     }
   }
 
-  const predictFeederActivity = (tempmax: number, cloudcover: number, windspeed: number) => {
+  const predictFeederActivity = (tempmax: number, cloudcover: number, windspeed: number, precipprob: number) => {
     // set sky as clear, partly cloudy, or cloudy
     // console.log('windspeed: ', windspeed)
     const sky = cloudcover < 20 ? 'sunny' : cloudcover < 80 ? 'partly cloudy' : 'cloudy';
     const wind = windspeed < 10 ? 'low' : windspeed <= 14 ? 'light' : 'windy';
 
     // high temp
-    if (tempmax > 82) return {
+    if (tempmax > 84) return {
+      activity: 'low',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      precipprob: precipprob,
+      forecast: forecastString.highTemps
+    }
+    // warm with rain
+    if (tempmax > 70 && tempmax < 84 && precipprob > 78) return {
       activity: 'moderate',
       tempmax: tempmax,
       cloudcover: sky,
       windspeed: wind,
-      forecast: forecastString.highTemps
+      precipprob: precipprob,
+      forecast: forecastString.warmWithRain
     }
     // cold with high winds
     if (tempmax <= 50 && windspeed >= 14) return {
@@ -94,13 +115,15 @@ logicController.forecast = async (req: any, res: any, next: any) => {
       activity: 'high',
       tempmax: tempmax,
       cloudcover: sky,
-      windspeed: wind
+      windspeed: wind,
+      forecast: ''
     };
     return {
-      activity: 'moderate',
+      activity: 'N/A',
       tempmax: tempmax,
       cloudcover: sky,
-      windspeed: wind
+      windspeed: wind,
+      forecast: ''
     };
   }
 
@@ -110,7 +133,8 @@ logicController.forecast = async (req: any, res: any, next: any) => {
       const tempmax = day.tempmax;
       const cloudcover = day.cloudcover;
       const windspeed = day.windspeed;
-      return predictFeederActivity(tempmax, cloudcover, windspeed)
+      const precipprob = day.precipprob;
+      return predictFeederActivity(tempmax, cloudcover, windspeed, precipprob)
     })
     res.locals = predictionValues;
 

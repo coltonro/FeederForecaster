@@ -1,9 +1,11 @@
 import React from 'react'
 import { Select } from '@mantine/core';
+// @ts-ignore 
+import { fetchUrl } from '../../fetchUrl';
 import './RegionSelect.css';
 
 type Props = {
-  setCity: React.Dispatch<React.SetStateAction<any>>
+  setCity: React.Dispatch<React.SetStateAction<any>>,
   setForecast: React.Dispatch<React.SetStateAction<any>>
 };
 
@@ -11,7 +13,7 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast }) => {
 
   const getWeather = (e: string | null) => {
     setCity(null)
-    fetch('http://localhost:8080/cityForecast', {
+    fetch(`${fetchUrl}/cityForecast`, {
       method: "POST",
       headers: {
         'Accept': 'application/json',
