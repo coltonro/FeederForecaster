@@ -4,10 +4,21 @@ interface logicController {
   forecast: any
 }
 
+interface Hour {
+  datetime: string,
+  precip: number,
+  precipprob: number,
+  windspeed: number,
+  winddir: number,
+  cloudcover: number
+}
+
 interface Day {
   tempmax: number,
   cloudcover: number,
   windspeed: number,
+  precip: number,
+  hours: [Hour],
   [prop: string]: any; // this allows for additional values without defining them
 }
 
@@ -17,7 +28,6 @@ logicController.forecast = async (req: any, res: any, next: any) => {
   // important values: temp, cloud cover, chance precip., month
   // helpful wind direct chart: 
   // https://www.researchgate.net/figure/Wind-Direction-and-Degree-Values_fig16_264876359
-  const { tempmax, cloudcover, windspeed, winddir } = res.locals;
   const determineWindDirection = (winddir: number) => {
     if (winddir > 337.5 && winddir < 22.5) return "north";
     if (winddir >= 22.5 && winddir < 67.5) return "northeast";
@@ -29,42 +39,47 @@ logicController.forecast = async (req: any, res: any, next: any) => {
     if (winddir >= 292.5 && winddir < 337.5) return "northwest";
   }
 
-  // determine the current season, so prediction output can be more specific
-  const determineSeason = () => {
-    const today = new Date().toISOString().split('T')[0];
-    const todayAsDate = new Date(today)
-    const year = new Date().getFullYear();
-
-    // seasons approximated by general Texas temps and bird activity, not actual equinox and solstice timings.
-    const spring = new Date(`${year}-04-01`);
-    const summer = new Date(`${year}-05-16`);
-    const fall = new Date(`${year}-09-15`);
-    const winter = new Date(`${year}-11-15`);
-
-    if (todayAsDate >= spring && todayAsDate < summer) {
-      return "Spring"
-    } else if (todayAsDate >= summer && todayAsDate < fall) {
-      return "Summer"
-    } else if (todayAsDate >= fall && todayAsDate < winter) {
-      return "Fall"
-    } else {
-      return "Winter"
-    }
-  }
-
-  const predictFeederActivity = (tempmax: number, cloudcover: number, windspeed: number) => {
+  const predictFeederActivity = (tempmax: number, cloudcover: number, windspeed: number, precipprob: number) => {
     // set sky as clear, partly cloudy, or cloudy
     // console.log('windspeed: ', windspeed)
     const sky = cloudcover < 20 ? 'sunny' : cloudcover < 80 ? 'partly cloudy' : 'cloudy';
     const wind = windspeed < 10 ? 'low' : windspeed <= 14 ? 'light' : 'windy';
 
     // high temp
-    if (tempmax > 82) return {
+    if (tempmax > 84) return {
+      activity: 'low',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      precipprob: precipprob,
+      description: forecastString.highTemps
+    }
+    // warm with rain
+    if (tempmax > 70 && tempmax < 84 && precipprob > 78) return {
       activity: 'moderate',
       tempmax: tempmax,
       cloudcover: sky,
       windspeed: wind,
-      forecast: forecastString.highTemps
+      precipprob: precipprob,
+      description: forecastString.warmWithRain
+    }
+    // warm, low wind, overcast, no rain
+    if (tempmax > 70 && tempmax < 84 && cloudcover >= 80 && windspeed < 14 && precipprob <= 20) return {
+      activity: 'moderate',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      precipprob: precipprob,
+      description: forecastString.warmLowWindOvercast
+    }
+    // warm, low wind, sun, no rain
+    if (tempmax > 70 && tempmax < 84 && cloudcover < 75 && windspeed < 14 && precipprob <= 20) return {
+      activity: 'low',
+      tempmax: tempmax,
+      cloudcover: sky,
+      windspeed: wind,
+      precipprob: precipprob,
+      description: forecastString.warmLowWindSun
     }
     // cold with high winds
     if (tempmax <= 50 && windspeed >= 14) return {
@@ -72,7 +87,7 @@ logicController.forecast = async (req: any, res: any, next: any) => {
       tempmax: tempmax,
       cloudcover: sky,
       windspeed: wind,
-      forecast: forecastString.highWindsButCold
+      description: forecastString.highWindsButCold
     };
     // cold
     if (tempmax <= 45) return {
@@ -80,7 +95,7 @@ logicController.forecast = async (req: any, res: any, next: any) => {
       tempmax: tempmax,
       cloudcover: sky,
       windspeed: wind,
-      forecast: forecastString.cold
+      description: forecastString.cold
     };
     // high winds
     if (tempmax >= 82 && cloudcover >= 80 && windspeed <= 10) return {
@@ -88,19 +103,21 @@ logicController.forecast = async (req: any, res: any, next: any) => {
       tempmax: tempmax,
       cloudcover: sky,
       windspeed: wind,
-      forecast: ''
+      description: ''
     };
     if (tempmax <= 60 && windspeed <= 10) return {
       activity: 'high',
       tempmax: tempmax,
       cloudcover: sky,
-      windspeed: wind
+      windspeed: wind,
+      description: ''
     };
     return {
-      activity: 'moderate',
+      activity: 'N/A',
       tempmax: tempmax,
       cloudcover: sky,
-      windspeed: wind
+      windspeed: wind,
+      description: ''
     };
   }
 
@@ -110,9 +127,10 @@ logicController.forecast = async (req: any, res: any, next: any) => {
       const tempmax = day.tempmax;
       const cloudcover = day.cloudcover;
       const windspeed = day.windspeed;
-      return predictFeederActivity(tempmax, cloudcover, windspeed)
+      const precipprob = day.precipprob;
+      return predictFeederActivity(tempmax, cloudcover, windspeed, precipprob)
     })
-    res.locals = predictionValues;
+    res.locals.forecast = predictionValues;
 
   } catch (err: any) {
     console.error("Error in logicController.forecast: ", err.message);

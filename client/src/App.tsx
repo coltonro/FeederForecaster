@@ -10,12 +10,22 @@ interface Forecast {
   activity: string,
   tempmax: number,
   cloudcover: string,
-  windspeed: string
+  windspeed: string,
+  precipprob: number,
+  description: string
 }
+
+interface Foods {
+  title: string,
+  desc: string,
+  imgPath: string,
+  details: string
+}[]
 
 function App() {
   const [city, setCity] = useState('')
   const [forecast, setForecast] = useState(Array<Forecast>)
+  const [foods, setFoods] = useState(Array<Foods>)
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"]
   const weekday: number = new Date().getDay()
@@ -48,7 +58,7 @@ function App() {
       <main className='allSections'>
         <section className='regionSelectContainer'>
           <div className='regionSelect'>
-            <RegionSelect setCity={setCity} setForecast={setForecast} />
+            <RegionSelect setCity={setCity} setForecast={setForecast} setFoods={setFoods} />
           </div>
         </section>
         {/* <div className={city && forecast.length < 1 ? 'showLoader' : 'displayNone'}>
@@ -69,7 +79,7 @@ function App() {
             <h2>Food</h2>
             <p>What Birds Want Right Now</p>
 
-            <Recommendations city={city} />
+            <Recommendations city={city} foods={foods} />
           </section>
           <section className='speciesSection'>
             <h2>Birds</h2>
