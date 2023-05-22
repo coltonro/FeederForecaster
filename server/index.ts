@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import weatherController from './src/apiController.js';
 import logicController from './src/logicController.js';
+import seasonalFoods from './src/seasonalFoods.js';
 const app = express();
 const PORT = 8080;
 
@@ -14,7 +15,8 @@ app.get('/', (req,res) => {
   res.sendFile(`${process.cwd()}../client/dist/index.html`);
 });
 
-app.use('/cityForecast', weatherController.apiData, logicController.forecast, (req, res) => {
+app.use('/cityForecast', weatherController.apiData, logicController.forecast, seasonalFoods.foods, (req, res) => {
+  console.log('res.locals: ', res.locals)
     res.json(res.locals);
   });
 

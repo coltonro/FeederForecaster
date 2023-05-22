@@ -7,9 +7,10 @@ import './RegionSelect.css';
 type Props = {
   setCity: React.Dispatch<React.SetStateAction<any>>,
   setForecast: React.Dispatch<React.SetStateAction<any>>
+  setFoods: React.Dispatch<React.SetStateAction<any>>
 };
 
-const RegionSelect: React.FC<Props> = ({ setCity, setForecast }) => {
+const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods }) => {
 
   const getWeather = (e: string | null) => {
     setCity(null)
@@ -25,7 +26,9 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast }) => {
     })
       .then(response => response.json())
       .then(data => {
-        setForecast(data)
+        console.log('data: ', data)
+        setForecast(data.forecast)
+        setFoods(data.foods)
       })
     setCity(e)
   }

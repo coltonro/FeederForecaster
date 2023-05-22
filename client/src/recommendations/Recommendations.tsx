@@ -2,55 +2,35 @@ import React, { useState } from 'react'
 import Card from '../card/Card'
 import './recommendations.css'
 
-type Props = {
-  city: null | string,
-};
-
-type Food = { 
+type Food = {
   title: string,
   desc: string,
-  imgPath: string
+  imgPath: string,
+  details: string
 }[];
 
+type Props = {
+  city: null | string,
+  foods: Food
+};
 
-// const Recommendations: React.FC<Props> = ({ city }) => {
-  const Recommendations = ( city: Props ) => {
-  const [food, setFood] = useState([
-    {
-      title: 'Sunflower',
-      desc: 'High quality protein',
-      imgPath: '/sunflowerseeds.jpg'
-    },
-    {
-      title: 'Suet',
-      desc: 'Crude fat for energy',
-      imgPath: '/suet_cake.png'
-    },
-    {
-      title: 'Peanuts',
-      desc: 'Favorite of Jays & Woodpeckers',
-      imgPath: '/peanuts.jpg'
-    }
-  ])
 
-  const displayCards = (food: Food) => {
-    return (
-      food.map((foodObj, i) => {
+const Recommendations: React.FC<Props> = ({ city, foods }) => {
+  console.log('recommendations: ', foods)
+
+    const displayCards = (foods: Food) => foods.map((foodObj, i) => {
         return (
-        <div className='cardContainer' key={`foodCard-${i}`}>
-          <Card foodObj={foodObj} />
-        </div>
+          <div className='cardContainer' key={`foodCard-${i}`}>
+            <Card foodObj={foodObj} />
+          </div>
         )
       })
+
+    return (
+      <>
+        {city && displayCards(foods)}
+      </>
     )
-  }
-
-  return (
-    <>
-      {city && displayCards(food)}
-    </>
-  )
-
 }
 
 export default Recommendations

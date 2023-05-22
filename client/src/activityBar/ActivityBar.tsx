@@ -6,7 +6,9 @@ interface Forecast {
     activity: string,
     tempmax: number,
     cloudcover: string,
-    windspeed: string
+    windspeed: string,
+    precipprob: number,
+    description: string
 }
 
 type Props = {
@@ -38,7 +40,7 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
                 </div>
                 <div className={`activityBar ${barHeight}`} onClick={() => setOpen(true)}>
                     <div className='dayText'>
-                        {i === 0 ? "Today" : weekday.slice(0, 3)}
+                        {i === 0 ? "Today*" : `${weekday.slice(0, 3)}*`}
                         {/* <img src='/info-button.svg' className='infoSvg' /> */}
                     </div>
                 </div>
@@ -64,8 +66,9 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
                     </p>
                 </div>
                 <p>{`Bird activity at your feeders will likely be `}<strong>{forecast.activity}</strong>{`.`}</p>
-                <p>{`With a high of ${Math.floor(forecast.tempmax)} degrees, ${forecast.cloudcover} skies, and ${forecast.windspeed} winds, birds will likely spend much of the day resting in the shade`}</p>
-                <p>{`Activity will spike in the cooler morning hours, then remain fairly slow for the rest of the day.`}</p>
+                <p>{`${forecast.description}`}</p>
+                {/* <p>{`With a high of ${Math.floor(forecast.tempmax)} degrees, ${forecast.cloudcover} skies, and ${forecast.windspeed} winds, birds will likely spend much of the day resting in the shade`}</p>
+                <p>{`Activity will spike in the cooler morning hours, then remain fairly slow for the rest of the day.`}</p> */}
             </Modal>
         </>
     )
