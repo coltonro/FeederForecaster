@@ -1,4 +1,5 @@
 import express from 'express';
+import serverless from 'serverless-http';
 import cors from 'cors';
 import weatherController from './src/apiController.js';
 import logicController from './src/logicController.js';
@@ -35,4 +36,4 @@ app.use((err: any, req: any, res: any, next: any) => {
 
 app.listen(PORT, () => { console.log(`Listening on port ${PORT}...`); });
 
-// export default app;
+// module.exports.handler = serverless(app);
