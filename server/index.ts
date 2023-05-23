@@ -24,7 +24,7 @@ app.use('/cityForecast', weatherController.apiData, logicController.forecast, se
  * 404 handler
  */
 app.use('*', (req, res) => {
-  res.status(404).send('404 Not Found');
+  res.status(404).send(`${req} 404 Not Found`);
 });
 
 // Global error handler
