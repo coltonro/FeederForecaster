@@ -16,7 +16,6 @@ type Props = {
 
 
 const Recommendations: React.FC<Props> = ({ city, foods }) => {
-  console.log('recommendations: ', foods)
 
     const displayCards = (foods: Food) => foods.map((foodObj, i) => {
         return (

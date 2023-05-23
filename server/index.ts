@@ -18,7 +18,6 @@ app.get('/', (req,res) => {
 });
 
 router.post('/cityForecast', weatherController.apiData, logicController.forecast, seasonalFoods.foods, (req, res) => {
-  console.log('res.locals: ', res.locals)
     res.json(res.locals);
   });
 
@@ -37,5 +36,6 @@ router.use((err: any, req: any, res: any, next: any) => {
 
 app.listen(PORT, () => { console.log(`Listening on port ${PORT}...`); });
 
-app.use('/.netlify/functions/index', router);
-module.exports.handler = serverless(app);
+app.use('/', router);
+// module.exports = app;
+// module.exports.handler = serverless(app);
