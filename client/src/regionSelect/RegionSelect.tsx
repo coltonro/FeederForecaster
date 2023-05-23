@@ -14,7 +14,7 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods }) => {
 
   const getWeather = (e: string | null) => {
     setCity(null)
-    fetch(`${fetchUrl}/cityForecast`, {
+    fetch(`/cityForecast`, {
       method: "POST",
       headers: {
         'Accept': 'application/json',
