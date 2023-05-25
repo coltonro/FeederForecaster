@@ -19,6 +19,7 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods }) => {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
+
       },
       body: JSON.stringify({
         city: e
