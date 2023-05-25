@@ -9,9 +9,8 @@
     "url": "git+https://github.com/coltonro/FeederForecaster.git"
   },
   "scripts": {
-    "build": "npm run build --prefix client",
-    "start": "node ./server/index.ts",
-    "start-prod": "ts-node-esm ./server/index.ts",
+    "build": "netlify-lambda build server && npm run build --prefix client",
+    "start": "nodemon ./server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Colton Robbins",
@@ -19,6 +18,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "netlify-lambda": "^2.0.16",
     "node-cache": "^5.1.2",
     "node-fetch": "^3.3.1",
     "serverless-http": "^3.2.0"
