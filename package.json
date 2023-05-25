@@ -9,7 +9,7 @@
     "url": "git+https://github.com/coltonro/FeederForecaster.git"
   },
   "scripts": {
-    "build": "./node_modules/.bin/netlify-lambda build src && npm run build --prefix client",
+    "build": "netlify-lambda build server && npm run build --prefix client",
     "start": "nodemon ./server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
