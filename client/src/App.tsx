@@ -77,7 +77,7 @@ function App() {
           </section>
           <section className='recommendationsSection'>
             <h2>Food</h2>
-            <p>What Birds Want Right Now</p>
+            <p>What Birds are Eating Now</p>
 
             <Recommendations city={city} foods={foods} />
           </section>

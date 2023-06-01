@@ -9,3 +9,19 @@
 .mantine-1m3pqry {
     width: 290px;
 }
+
+/* accordian container */
+.mantine-1avyp1d {
+    width: 100%
+}
+
+/* accordian img container */
+.mantine-hiq9ky {
+    width: 100px;
+    height: 100px;
+}
+
+/* accordian text (while expanded) */
+.mantine-2qa0ve {
+    font-size: 19px;
+}
