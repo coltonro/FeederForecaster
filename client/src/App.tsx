@@ -15,11 +15,17 @@ interface Forecast {
   description: string
 }
 
+type Details = {
+  1: String,
+  2: String,
+  3: String
+}
+
 interface Foods {
   title: string,
   desc: string,
   imgPath: string,
-  details: string
+  details: Details
 }[]
 
 function App() {
