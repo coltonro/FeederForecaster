@@ -28,19 +28,27 @@ interface Foods {
   details: Details
 }[]
 
-function App() {
-  const [city, setCity] = useState('')
-  const [forecast, setForecast] = useState(Array<Forecast>)
-  const [foods, setFoods] = useState(Array<Foods>)
+interface Birds {
+  title: string,
+  desc: string,
+  imgPath: string,
+  details: Details
+}[]
 
-  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"]
-  const weekday: number = new Date().getDay()
-  const weekdaysForActivityBars = [days[weekday], days[weekday + 1], days[weekday + 2], days[weekday + 3]]
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-  const todaysMonth: string = months[new Date().getMonth()]
-  const todaysDate: number = new Date().getDate()
-  const twoDaysFromToday: number = new Date(`${todaysMonth} ${todaysDate + 2}`).getDate()
-  const monthInTwoDays: string = months[new Date(`${todaysMonth} ${todaysDate + 2}`).getMonth()]
+function App() {
+  const [city, setCity] = useState('');
+  const [forecast, setForecast] = useState(Array<Forecast>);
+  const [foods, setFoods] = useState(Array<Foods>);
+  const [birds, setBirds] = useState(Array<Birds>);
+
+  const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"];
+  const weekday: number = new Date().getDay();
+  const weekdaysForActivityBars = [days[weekday], days[weekday + 1], days[weekday + 2], days[weekday + 3]];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const todaysMonth: string = months[new Date().getMonth()];
+  const todaysDate: number = new Date().getDate();
+  const twoDaysFromToday: number = new Date(`${todaysMonth} ${todaysDate + 2}`).getDate();
+  const monthInTwoDays: string = months[new Date(`${todaysMonth} ${todaysDate + 2}`).getMonth()];
 
   const dailyPredictions = () => {
     const mappedForecast = forecast.map((day: Forecast, i: number) => {
@@ -52,8 +60,8 @@ function App() {
         key={`activityBar-${i}`} />
     });
 
-    return forecast.length ? mappedForecast : <Loader className='forecastLoader' /> ;
-  }
+    return forecast.length ? mappedForecast : <Loader className='forecastLoader' />
+  };
 
   return (
     <div className='app'>
@@ -64,7 +72,7 @@ function App() {
       <main className='allSections'>
         <section className='regionSelectContainer'>
           <div className='regionSelect'>
-            <RegionSelect setCity={setCity} setForecast={setForecast} setFoods={setFoods} />
+            <RegionSelect setCity={setCity} setForecast={setForecast} setFoods={setFoods} setBirds={setBirds} />
           </div>
         </section>
         {/* <div className={city && forecast.length < 1 ? 'showLoader' : 'displayNone'}>
@@ -90,7 +98,7 @@ function App() {
           <section className='speciesSection'>
             <h2>Birds</h2>
             <p>Species to Watch For</p>
-            <Species city={city} />
+            <Species city={city} birds={birds} />
           </section>
         </div>
       </main>
