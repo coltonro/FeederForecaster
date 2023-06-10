@@ -66,9 +66,9 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
                     </p>
                 </div>
                 <p>{`Bird activity at your feeders will likely be `}<strong>{forecast.activity}</strong>{`.`}</p>
-                <p>{`${forecast.description}`}</p>
-                {/* <p>{`With a high of ${Math.floor(forecast.tempmax)} degrees, ${forecast.cloudcover} skies, and ${forecast.windspeed} winds, birds will likely spend much of the day resting in the shade`}</p>
-                <p>{`Activity will spike in the cooler morning hours, then remain fairly slow for the rest of the day.`}</p> */}
+                {/* <p>{`${forecast.description}`}</p> */}
+                <p>{`With a high of ${Math.floor(forecast.tempmax)} degrees, ${forecast.cloudcover} skies, and ${forecast.windspeed} winds, birds will likely spend much of the day resting in the shade`}</p>
+                <p>{`Activity will spike in the cooler morning hours, then remain fairly slow for the rest of the day.`}</p>
             </Modal>
         </>
     )
