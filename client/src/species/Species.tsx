@@ -46,9 +46,6 @@ const AccordionLabel: React.FC<Birds> = (bird) => {
       <Avatar src={bird.imgPath} radius="xl" size="lg" />
       <div>
         <Text>{bird.title}</Text>
-        <Text size="sm" color="black" weight={400}>
-          {bird.desc}
-        </Text>
       </div>
     </Group>
   );
