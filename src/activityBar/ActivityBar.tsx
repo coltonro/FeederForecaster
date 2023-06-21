@@ -40,7 +40,7 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
                 </div>
                 <div className={`activityBar ${barHeight}`} onClick={() => setOpen(true)}>
                     <div className='dayText'>
-                        {i === 0 ? "Today*" : `${weekday.slice(0, 3)}*`}
+                        {i === 0 ? "Today" : `${weekday.slice(0, 3)}`}
                         {/* <img src='/info-button.svg' className='infoSvg' /> */}
                     </div>
                 </div>

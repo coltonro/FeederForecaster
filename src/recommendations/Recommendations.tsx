@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Group, Avatar, Text, Accordion } from '@mantine/core';
 import './recommendations.css';
 
@@ -19,24 +18,6 @@ type Props = {
   city: null | string,
   foods: Foods[]
 };
-
-
-// const Recommendations: React.FC<Props> = ({ city, foods }) => {
-
-//     const displayCards = (foods: Food) => foods.map((foodObj, i) => {
-//         return (
-//           <div className='cardContainer' key={`foodCard-${i}`}>
-//             <Card foodObj={foodObj} />
-//           </div>
-//         )
-//       })
-
-//     return (
-//       <>
-//         {city && displayCards(foods)}
-//       </>
-//     )
-// }
 
 const AccordionLabel: React.FC<Foods> = (food) => {
   return (
@@ -64,9 +45,7 @@ const Recommendations = ({ city, foods }: Props) => {
           <li>{food.details[2]}</li>
           <li>{food.details[3]}</li>
         </ul>
-        {/* <Text size="sm"><ul>{food.details[1]}</ul></Text>
-        <Text size="sm">{food.details[2]}</Text>
-        <Text size="sm">{food.details[3]}</Text> */}
+        {/* <Text size="sm"><ul>{food.details[1]}</ul></Text> */}
       </Accordion.Panel>
     </Accordion.Item>
   ));

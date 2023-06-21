@@ -8,10 +8,9 @@ type Props = {
   setCity: React.Dispatch<React.SetStateAction<any>>,
   setForecast: React.Dispatch<React.SetStateAction<any>>
   setFoods: React.Dispatch<React.SetStateAction<any>>
-  setBirds: React.Dispatch<React.SetStateAction<any>>
 };
 
-const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods, setBirds }) => {
+const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods }) => {
 
   const getWeather = (e: string | null) => {
     setCity(null)
@@ -31,7 +30,6 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods, setBird
         console.log('data: ', data)
         setForecast(data.forecast)
         setFoods(data.foods)
-        setBirds(data.birds)
       })
     setCity(e)
   }
