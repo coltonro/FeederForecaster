@@ -2,7 +2,6 @@ import { useState } from 'react';
 import RegionSelect from './regionSelect/RegionSelect';
 import ActivityBar from './activityBar/ActivityBar';
 import Recommendations from './recommendations/Recommendations';
-import Species from './species/Species';
 import { Loader } from '@mantine/core';
 import './App.css';
 
@@ -28,18 +27,11 @@ interface Foods {
   details: Details
 }[]
 
-interface Birds {
-  title: string,
-  desc: string,
-  imgPath: string,
-  details: Details
-}[]
-
 function App() {
   const [city, setCity] = useState('');
   const [forecast, setForecast] = useState(Array<Forecast>);
   const [foods, setFoods] = useState(Array<Foods>);
-  const [birds, setBirds] = useState(Array<Birds>);
+  const [showLoader, setShowLoader] = useState(false);
 
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"];
   const weekday: number = new Date().getDay();
@@ -60,7 +52,7 @@ function App() {
         key={`activityBar-${i}`} />
     });
 
-    return forecast.length ? mappedForecast : <Loader className='forecastLoader' />
+    return showLoader ? <Loader className='forecastLoader' /> : mappedForecast;
   };
 
   return (
@@ -72,7 +64,7 @@ function App() {
       <main className='allSections'>
         <section className='regionSelectContainer'>
           <div className='regionSelect'>
-            <RegionSelect setCity={setCity} setForecast={setForecast} setFoods={setFoods} setBirds={setBirds} />
+            <RegionSelect city={city} setCity={setCity} setForecast={setForecast} setFoods={setFoods} setShowLoader={setShowLoader}/>
           </div>
         </section>
         {/* <div className={city && forecast.length < 1 ? 'showLoader' : 'displayNone'}>
@@ -87,18 +79,12 @@ function App() {
             <section className='activityBarContainer'>
               {city ? dailyPredictions() : <Loader />}
             </section>
-            {'* select day to see full forecast'}
+            {/* <DetailedForecast forecast={forecast}/> */}
           </section>
           <section className='recommendationsSection'>
             <h2>Food</h2>
             <p>What Birds are Eating Now</p>
-
             <Recommendations city={city} foods={foods} />
-          </section>
-          <section className='speciesSection'>
-            <h2>Birds</h2>
-            <p>Species to Watch For</p>
-            <Species city={city} birds={birds} />
           </section>
         </div>
       </main>
