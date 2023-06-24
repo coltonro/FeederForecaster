@@ -21,16 +21,11 @@ type Props = {
 const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
     const [open, setOpen] = useState(false); // controls modal
 
-//     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-//     const todaysMonth: string = months[new Date().getMonth()]
-//   const todaysDate: number = new Date().getDate()
-//     const twoDaysFromToday: number = new Date(`${todaysMonth} ${todaysDate + 2}`).getDate()
-//   const monthInTwoDays: string = months[new Date(`${todaysMonth} ${todaysDate + 2}`).getMonth()]
-
     const barHeight = city ? forecast.activity === 'low' ? 'lowHeight' :
         forecast.activity === 'moderate' ? 'mediumHeight' :
             forecast.activity === 'high' ? 'highHeight' :
                 'minHeight' : '';
+
 
     return (
         <>
@@ -66,9 +61,7 @@ const ActivityBar: React.FC<Props> = ({ city, forecast, weekday, i }) => {
                     </p>
                 </div>
                 <p>{`Bird activity at your feeders will likely be `}<strong>{forecast.activity}</strong>{`.`}</p>
-                {/* <p>{`${forecast.description}`}</p> */}
-                <p>{`With a high of ${Math.floor(forecast.tempmax)} degrees, ${forecast.cloudcover} skies, and ${forecast.windspeed} winds, birds will likely spend much of the day resting in the shade`}</p>
-                <p>{`Activity will spike in the cooler morning hours, then remain fairly slow for the rest of the day.`}</p>
+                <p>{forecast.description}</p>
             </Modal>
         </>
     )

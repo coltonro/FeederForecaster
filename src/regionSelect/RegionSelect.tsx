@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select } from '@mantine/core';
 // @ts-ignore 
 import { fetchUrl } from '../../fetchUrl';
 import './RegionSelect.css';
 
 type Props = {
+  city: string,
   setCity: React.Dispatch<React.SetStateAction<any>>,
   setForecast: React.Dispatch<React.SetStateAction<any>>
-  setFoods: React.Dispatch<React.SetStateAction<any>>
+  setFoods: React.Dispatch<React.SetStateAction<any>>,
+  setShowLoader: React.Dispatch<React.SetStateAction<any>>
 };
 
-const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods }) => {
+const RegionSelect: React.FC<Props> = ({ city, setCity, setForecast, setFoods, setShowLoader }) => {
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 1000);
+  }, [city])
 
   const getWeather = (e: string | null) => {
-    setCity(null)
+    setShowLoader(true);
     fetch(`${fetchUrl}/cityForecast`, {
       method: "POST",
       headers: {
@@ -27,11 +35,10 @@ const RegionSelect: React.FC<Props> = ({ setCity, setForecast, setFoods }) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log('data: ', data)
         setForecast(data.forecast)
         setFoods(data.foods)
       })
-    setCity(e)
+    setCity(e);
   }
 
   return (
