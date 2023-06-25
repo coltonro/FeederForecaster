@@ -53,9 +53,16 @@
     font-size: 17px;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 410px) {
     .dayText {
         padding: 0 10px;
+    }
+}
+
+@media screen and (max-width: 430px) {
+    .dayText {
+    color: mediumblue;
+    text-decoration: underline;
     }
 }
 
